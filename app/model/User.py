@@ -20,7 +20,6 @@ class User(db.Model):
         username = input()
         print('Enter password:')
         password = input()
-        password = generate_password_hash(password)
         data = User(username=username, password=password)
         db.session.add(data)
         db.session.commit()
@@ -46,3 +45,10 @@ class User(db.Model):
         User.query.filter_by(username=username, password=password).update({'token': token})
         db.session.commit()
         return True
+
+    def getToken(self):
+        users = User.query.all()
+        dict_users = {}
+        for user in users:
+            dict_users.update({user.token: user.username})
+        return dict_users

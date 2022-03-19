@@ -3,12 +3,15 @@
 from app import app
 from app import token
 from flask import Flask
+from app.model.User import User
+
 
 class Tokenisation:
     @token.verify_token
-    def verify_token(token):
-        tokens = []
+    def verify_token(self, token):
+        user = User()
+        tokens = user.getToken()
         if token in tokens:
             return True
         else:
-            False
+            return tokens

@@ -7,12 +7,6 @@ from flask import jsonify
 from app.model.User import User
 from werkzeug.security import generate_password_hash, check_password_hash
 
-# users = {
-#     "john": generate_password_hash("hello"),
-#     "susan": generate_password_hash("bye"),
-#     "galih": generate_password_hash("galih")
-# }
-
 class Authentincation:
     @auth.verify_password
     def verify_password(self, username, password):

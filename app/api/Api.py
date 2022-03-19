@@ -12,6 +12,7 @@ def authentication():
     username = request.values.get('username')
     password = request.values.get('password')
     authentincation = Authentincation()
+   
     if (authentincation.verify_password(username, password) ) :
         # update new token
         token = ''.join(random.choices(
@@ -22,15 +23,20 @@ def authentication():
         # return token
         data = {"token":token}
         return jsonify(data)
-    data = {"status": "failed"}
+    data = {"status": "failed", "msg": "password doesn.t match!"}
     return jsonify(data)
 
 @app.route('/api/v2/users/info', methods=['POST'])
 def getInfo():
+    tokenisation = Tokenisation()
     token = request.values.get('token')
-    if (verify_token()) :
+    return jsonify(tokenisation.verify_token(token))
+    if (tokenisation.verify_token(token)) :
         # show user information
         return "ok"
+    else :
+        data = {"status": "failed", "msg": "Token incorrect!"}
+        return jsonify(data)
 
 @app.route('/api/getUser', methods=['GET'])
 def getUser():
