@@ -52,3 +52,14 @@ class User(db.Model):
         for user in users:
             dict_users.update({user.token: user.username})
         return dict_users
+
+    def getUserByToken(self, token):
+        users = User.query.filter_by(token=token).all()
+        array_users = []
+        for user in users:
+            dict_users = {}
+            dict_users.update({"username": user.username, "password": user.password, "token": user.token})
+            array_users.append(dict_users)
+        return jsonify(array_users), 200, {'content-type':'application/json'} 
+        # return {'content-type':'application/json', 'token': token} 
+

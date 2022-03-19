@@ -14,4 +14,4 @@ class Tokenisation:
         if token in tokens:
             return True
         else:
-            return tokens
+            return False

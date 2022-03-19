@@ -30,10 +30,10 @@ def authentication():
 def getInfo():
     tokenisation = Tokenisation()
     token = request.values.get('token')
-    return jsonify(tokenisation.verify_token(token))
+
     if (tokenisation.verify_token(token)) :
-        # show user information
-        return "ok"
+        user = User()
+        return user.getUserByToken(token)
     else :
         data = {"status": "failed", "msg": "Token incorrect!"}
         return jsonify(data)
@@ -41,7 +41,7 @@ def getInfo():
 @app.route('/api/getUser', methods=['GET'])
 def getUser():
     user = User()
-    return user.getUser_array()
+    return user.getUser()
 
 @app.route('/api/addUser', methods=['GET'])
 def addUser():
