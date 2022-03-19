@@ -5,4 +5,4 @@ from app import app
 # M. Galih Fikran Syah - 19090074
 
 # app/my_data.db
-# Username Password (arimbi arimbi)
+# Username Password (galih galih)
