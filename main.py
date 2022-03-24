@@ -76,7 +76,10 @@ def authentication():
 def users_info():
     token = request.values.get('token')
     account = User.query.filter_by(token=token).first()
-    return account.username
+    if account:
+        return account.username
+    else:
+        return 'Salah bro!! tokennya..'
 
 
 if __name__ == '__main__':
