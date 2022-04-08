@@ -46,8 +46,7 @@ def upload_file():
         # return redirect(request.url)
         return jsonify({'msg': 'No selected file'}), 400
     if file and allowed_file(file.filename):
-        # filename = secure_filename(file.filename)
-        suffix = "images.jpg"
+        suffix = secure_filename(file.filename)
         ident = uuid4().__str__()[:8]
         filename = f"{ident}-{suffix}"
         filepath = app.config['UPLOAD_FOLDER'] + "/" + filename
